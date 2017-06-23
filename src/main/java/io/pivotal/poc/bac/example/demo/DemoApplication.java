@@ -26,6 +26,12 @@ public class DemoApplication {
 		return "index";
 	}
 
+	@RequestMapping("/unprotected")
+	public String indexUnprotected(RequestEntity<byte[]> incoming, Model model) throws Exception {
+		model.addAttribute("headers", toPrettyJsonString(incoming.getHeaders()));
+		return "unprotected-index";
+	}
+
 	private String toPrettyJsonString(Object object) throws Exception {
 		return objectMapper.writerWithDefaultPrettyPrinter().writeValueAsString(object);
 	}
